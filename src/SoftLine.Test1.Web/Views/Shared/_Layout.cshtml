@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <!-- Global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+    <link href="assets/css/icons/fontawesome/styles.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/core.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/components.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/colors.css" rel="stylesheet" type="text/css">
+    <!-- /global stylesheets -->
+    <!-- Core JS files -->
+    <script type="text/javascript" src="assets/js/core/libraries/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/core/libraries/bootstrap.min.js"></script>
+    <!-- /core JS files -->
+    <!-- Theme JS files -->
+    <script type="text/javascript" src="assets/js/core/app.js"></script>
+    <!-- /theme JS files -->
+
+    <style>
+        th {
+            font-weight: bold;
+        }
+
+        .table-hover tr .td-action button {
+            display: none;
+        }
+
+        .table-hover tr:hover .td-action button {
+            display: inline;
+        }
+
+        .table-hover tr .td-action ul:nth-child(1) {
+            display: none;
+        }
+
+        .table-hover tr:hover .td-action ul:nth-child(1) {
+            display: inline;
+        }
+
+        .td-action {
+            width: 60px;
+            padding: 0 !important;
+            text-align: center;
+        }
+
+        .validation-summary-errors {
+            float: right;
+            color: red;
+        }
+    </style>
+</head>
+<body ng-app="SLTest.App">
+
+    <h1 style="width: 60%; margin: 20px auto;">MVC Test App</h1>
+
+    <!-- Page container -->
+    <div class="page-container">
+        <!-- Page content -->
+        <div class="page-content">
+
+            <!-- Main content -->
+            <div class="content-wrapper">
+
+                <!-- Content area -->
+                <div class="content" style="width: 60%; margin: 0 auto;">
+
+                    @RenderBody()
+
+                </div>
+                <!-- /content area -->
+            </div>
+            <!-- /main content -->
+        </div>
+        <!-- /page content -->
+    </div>
+    <!-- /page container -->
+
+
+    <script src="~/lib/angular/angular.js"></script>
+    <script src="~/lib/angular-mask/dist/ngmask.js"></script>
+
+    <script src="~/js/angular1app/app.js"></script>
+    <script src="~/js/angular1app/controllers.js"></script>
+    <script src="~/js/angular1app/services.js"></script>
+
+</body>
+</html>

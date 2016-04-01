@@ -1,0 +1,138 @@
+﻿@{
+    ViewData["Title"] = "Список контактов";
+}
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="SaveContactsController">
+    <div class="modal-dialog" role="document">
+        <form name="saveForm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Управление лицензиями</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group  form-group-sm row">
+                        <label class="col-sm-3 control-label">Номер</label>
+                        <div class="col-sm-9">
+                            {{model.Model.Number}}
+                        </div>
+                    </div>
+                    <div class="form-group  form-group-sm row">
+                        <label class="col-sm-3 control-label">Имя</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="" ng-model="model.Model.FirstName">
+                        </div>
+                    </div>
+                    <div class="form-group  form-group-sm row">
+                        <label class="col-sm-3 control-label">Отчество</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="" ng-model="model.Model.MiddleName">
+                        </div>
+                    </div>
+
+                    <div class="form-group  form-group-sm row">
+                        <label class="col-sm-3 control-label">Фамилия</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder=""
+                                   name="LastName"
+                                   ng-model="model.Model.LastName" 
+                                   required>
+                        </div>
+                        <div class="validation-summary-errors col-sm-9">
+                            <div ng-if="saveForm.LastName.$error.required">Полеобязательно для заполнения.</div>
+                        </div>
+                    </div>
+                    <div class="form-group  form-group-sm row">
+                        <label class="col-sm-3 control-label">Телефон</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder=""
+                                   name="Phone"
+                                   mask="9(999)9999999"
+                                   ng-model="model.Model.Phone"
+                                   required>
+                        </div>
+                        <div class="validation-summary-errors col-sm-9">
+                            <div ng-if="saveForm.Phone.$error.required">Полеобязательно для заполнения.</div>
+                            <div ng-if="saveForm.Phone.$error.mask">Укажите корректный номер телефона.</div>
+                        </div>
+                    </div>
+                    <div class="form-group  form-group-sm row">
+                        <label class="col-sm-3 control-label">Электронная почта</label>
+                        <div class="col-sm-9">
+                            <input type="email" class="form-control" placeholder=""
+                                   name="Email"
+                                   ng-model="model.Model.Email" 
+                                   required>
+                        </div>
+                        <div class="validation-summary-errors col-sm-9">
+                            <div ng-if="saveForm.Email.$error.required">Полеобязательно для заполнения.</div>
+                            <div ng-if="saveForm.Email.$error.email">Укажите корректный адрес электронной почты.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-default"
+                            ng-disabled="!saveForm.$valid"
+                            ng-class="{'btn-primary': saveForm.$valid}"
+                            ng-click="ModelUtils.save(model.Model)">Сохранить</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="panel panel-white" ng-controller="ContactsController">
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            Список контактов
+            <span class="glyphicon glyphicon-search" aria-hidden="true" style="margin: 0 0 0 20px;"></span>
+            <input ng-model="searchText"/>
+        </h5>
+        <div class="heading-elements">
+            <button type="button" class="btn btn-success btn-sm" ng-click="ListUtils.saveShow(null)">Добавить контакт</button>
+        </div>
+    </div><!-- panel-heading -->
+    <div class="panel-body no-padding">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Номер</th>
+                    <th>Имя</th>
+                    <th>Отчество</th>
+                    <th>Фамилия</th>
+                    <th>Телефон</th>
+                    <th>Электронная почта</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in model.list | filter:searchText">
+                    <td>{{item.Number}}</td>
+                    <td>{{item.FirstName}}</td>
+                    <td>{{item.MiddleName}}</td>
+                    <td>{{item.LastName}}</td>
+                    <td>{{item.Phone}}</td>
+                    <td>{{item.Email}}</td>
+                    <td class="td-action">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#" ng-click="ListUtils.saveShow(item)"><i class="fa fa-pencil"></i> редактировать</a></li>
+                                    <li><a href="#" ng-click="ListUtils.remove(item)"><i class="fa fa-trash-o"></i>Удалить</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
